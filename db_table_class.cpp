@@ -35,8 +35,6 @@ void distance::set_distance(char* db_distance)
 ////                Relation methods and functions
 
 
-
-
 void relation::set_drugstore_id(char* db_drugstore_id)
 {
     std::string buf = db_drugstore_id;
@@ -73,6 +71,12 @@ void relation::set_count(char* db_count)
 ////                Drug methods and functions
 
 
+
+int drug::get_id()
+{
+    return id;
+}
+
 void drug::set_id(char* db_drug_id)
 {
     std::string buf = db_drug_id;
@@ -100,6 +104,11 @@ void drug::set_international_name(char* db_international_name)
 ////                Drugstore methods and functions
 
 
+
+int drugstore::get_id()
+{
+    return id;
+}
 
 void drugstore::set_id(char* db_drugstore_id)
 {
@@ -146,17 +155,17 @@ void drugstore::set_name(char* db_international_name)
 
 // drugstore without long and lat methods
 
-int get_id();
+int drugstore_no_coordinates::get_id()
 {
     return id;
 }
 
-std::string get_address()
+std::string drugstore_no_coordinates::get_address()
 {
     return address;
 }
 
-std::string get_name()
+std::string drugstore_no_coordinates::get_name()
 {
     return name;
 }

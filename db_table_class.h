@@ -16,13 +16,14 @@ private:
 
 public:
 
+    int get_id();
+    
     void set_id(char* db_drugstore_id);
 	void set_longitude(char* db_longitude);
 	void set_latitude(char* db_latitude);
     void set_square_id(char* db_square_id);
 	void set_address(char* db_drugstore_address);
 	void set_name(char* db_drugstore_name);
-
 
 };
 
@@ -45,7 +46,6 @@ public:
 	void set_address(char* db_drugstore_address);
 	void set_name(char* db_drugstore_name);
 
-
 };
 
 
@@ -60,7 +60,8 @@ private:
 
 public:
 
-
+    int get_id();
+    
 	void set_id(char* db_drug_id);
 	void set_name(char* db_drug_name);
 	void set_international_name(char* db_international_name);
@@ -102,7 +103,6 @@ public:
 	void set_drugstore_a_id(char* drugstore_a_id);
 	void set_drugstore_b_id(char* drugstore_b_id);
 	void set_distance(char* db_distance);
-    
 
 };
 

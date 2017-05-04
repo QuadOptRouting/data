@@ -1,6 +1,7 @@
 #ifndef DB_CONN_PROPERTIES_H
 #define DB_CONN_PROPERTIES_H
 #include <iostream>
+#include <fstream>
 
 class properties
 {

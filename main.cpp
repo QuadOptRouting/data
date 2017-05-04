@@ -6,7 +6,7 @@ int main()
     auto conn = db_connection();
     std::cout<<"successfully established conn"<<std::endl;
     
-    std::string drugstore_sql_transaction =  "SELECT * FROM \"QOR_main_scheme\".\"drug\" LIMIT 10";
+    std::string drugstore_sql_transaction =  "SELECT * FROM \"QOR_main_scheme\".\"drugstore\" LIMIT 10";
 
 	std::shared_ptr<PGresult> select_from_drugstore;
     
@@ -15,9 +15,11 @@ int main()
     if ( !( PQresultStatus( select_from_drugstore.get() ) == PGRES_TUPLES_OK && PQntuples( select_from_drugstore.get() ) ) )
         throw std::runtime_error("Exception with request"); //Checking for bad tuples
     
-    std::vector<drug> received_drugs = get_drugs(select_from_drugstore);
+    std::vector<drugstore_no_coordinates> received_drugstores (10);
+    received_drugstores = get_drugstores_no_coordinates( select_from_drugstore );
     
     std::cout<<PQntuples( select_from_drugstore.get() )<<std::endl;
+    std::cout<<received_drugstores[0].get_address()<<std::endl;
     std::cout<<"success. total."<<std::endl;
     
     return 0;

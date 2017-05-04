@@ -1,4 +1,3 @@
-#include <fstream>
 #include "db_conn_properties.h"
 
 bool properties::substitute_properties()
