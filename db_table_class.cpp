@@ -91,12 +91,12 @@ void drug::set_name(char* db_drug_name)
     name = buf;
 }
 
-void drug::set_international_name(char* db_international_name)
+/*void drug::set_international_name(char* db_international_name)
 {
     std::string buf = db_international_name;
 
     international_name = buf;
-}
+}*/
     
     
     
@@ -108,6 +108,15 @@ void drug::set_international_name(char* db_international_name)
 int drugstore::get_id()
 {
     return id;
+}
+
+std::string drugstore::to_string()
+{
+    std::string row;
+
+    row = std::to_string( id ) + " " + address + " " + std::to_string( longitude ) + " " + std::to_string( latitude ) + " " + std::to_string( square_id ) + " " + name;
+    
+    return row;
 }
 
 void drugstore::set_id(char* db_drugstore_id)

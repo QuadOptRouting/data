@@ -1,9 +1,11 @@
-#include "db_conn_class.h"
-#include "db_request.h"
+//#include "db_conn_class.h"
+//#include "db_request.h"
+#include "db_class.h"
 
 int main()
 {
-    auto conn = db_connection();
+ /*   db_connection conn;
+    
     std::cout<<"successfully established conn"<<std::endl;
     
     std::string drugstore_sql_transaction =  "SELECT * FROM \"QOR_main_scheme\".\"drugstore\" LIMIT 10";
@@ -20,7 +22,33 @@ int main()
     
     std::cout<<PQntuples( select_from_drugstore.get() )<<std::endl;
     std::cout<<received_drugstores[0].get_address()<<std::endl;
-    std::cout<<"success. total."<<std::endl;
+    std::cout<<"success. total."<<std::endl;*/
+    db example;
+    
+    std::vector<int> drugstore_ids (2);
+    
+    std::vector<drugstore> received_drugstores (drugstore_ids.size());
+    
+    drugstore_ids[0] = 135;
+    drugstore_ids[1] = 107;
+    
+    std::cout<<drugstore_ids.size()<<std::endl;
+    
+    received_drugstores = example.request_drugstores( drugstore_ids );
+    std::cout<<received_drugstores.size()<<std::endl;
+    
+    std::vector<int> drug_ids (2);
+    std::vector<drug> received_drugs ( drug_ids.size() );
+    
+    drug_ids[0] = 136698;
+    drug_ids[1] = 132531;
+   
+  //  std::cout<<drug_ids.size()<<std::endl;
+    
+    received_drugs = example.request_drugs( drug_ids );
+    
+  //  std::cout<<received_drugs.size()<<std::endl;
+    std::cout<<"first element id: "<<received_drugs[0].get_id()<<std::endl;
     
     return 0;
     

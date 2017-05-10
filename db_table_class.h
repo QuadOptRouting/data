@@ -8,15 +8,20 @@ class drugstore
 private:
 
     int id;
+    
     double longitude;
     double latitude;
+    
     int square_id;
+    
     std::string address;
     std::string name;
 
 public:
 
     int get_id();
+    
+    std::string to_string();
     
     void set_id(char* db_drugstore_id);
 	void set_longitude(char* db_longitude);
@@ -56,7 +61,7 @@ private:
 
     int id;
     std::string name;
-    std::string international_name;
+//    std::string international_name;
 
 public:
 
@@ -64,7 +69,7 @@ public:
     
 	void set_id(char* db_drug_id);
 	void set_name(char* db_drug_name);
-	void set_international_name(char* db_international_name);
+//	void set_international_name(char* db_international_name);
 
 };
 

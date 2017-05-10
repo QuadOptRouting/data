@@ -9,19 +9,19 @@ std::vector<drug> get_drugs( std::shared_ptr<PGresult> select_res )
     
     int column_id = PQfnumber( select_res.get(), "id" );
     int column_name = PQfnumber( select_res.get(), "name" );
-    int column_international_name = PQfnumber( select_res.get(), "international_name" );
+//    int column_international_name = PQfnumber( select_res.get(), "international_name" );
     
     
-    for ( size_t i; i<n_rows; i++ )
+    for ( size_t i = 0; i < n_rows; i++ )
     {
         
-        if ( PQgetisnull( select_res.get(), i, column_id ) || PQgetisnull( select_res.get(), i, column_name ) || PQgetisnull( select_res.get(), i, column_international_name ) ) //Checking for empty values, if exist at least
+        if ( PQgetisnull( select_res.get(), i, column_id ) || PQgetisnull( select_res.get(), i, column_name ) ) //Checking for empty values, if exist at least
             continue;      //Throw row if find null   , long di                                                                                   // one null then continue on next iteration.
-            
+
         drugs[i].set_id( PQgetvalue( select_res.get(), i, column_id) );
         drugs[i].set_name( PQgetvalue( select_res.get(), i, column_name) );
-        drugs[i].set_international_name( PQgetvalue( select_res.get(), i, column_international_name ) );
         
+  //      drugs[i].set_international_name( PQgetvalue( select_res.get(), i, column_international_name ) );
         length++;
         
     }
@@ -54,7 +54,7 @@ std::vector<drugstore> get_drugstores( std::shared_ptr<PGresult> select_res )
     
 
     
-    for ( size_t i; i<n_rows; i++ )
+    for ( size_t i = 0; i<n_rows; i++ )
     {
         
         if ( PQgetisnull( select_res.get(), i, column_id ) || PQgetisnull( select_res.get(), i, column_address ) || PQgetisnull( select_res.get(), i, column_longitude )|| PQgetisnull( select_res.get(), i, column_latitude ) || PQgetisnull( select_res.get(), i, column_id_square ) || PQgetisnull( select_res.get(), i, column_name ) )             
@@ -75,7 +75,7 @@ std::vector<drugstore> get_drugstores( std::shared_ptr<PGresult> select_res )
     {
         drugstores.resize(length);
         drugstores.shrink_to_fit();
-        
+        std::cout<<"Found some nulls in rows"<<std::endl;
     }
     
     return drugstores;
@@ -96,7 +96,7 @@ std::vector<drugstore_no_coordinates> get_drugstores_no_coordinates( std::shared
     
 
     
-    for ( size_t i; i<n_rows; i++ )
+    for ( size_t i = 0; i<n_rows; i++ )
     {
         
         if ( PQgetisnull( select_res.get(), i, column_id ) || PQgetisnull( select_res.get(), i, column_address ) || PQgetisnull( select_res.get(), i, column_name ) )             
@@ -134,7 +134,7 @@ std::vector<relation> get_relations( std::shared_ptr<PGresult> select_res )
     
 
     
-    for ( size_t i; i<n_rows; i++ )
+    for ( size_t i = 0; i<n_rows; i++ )
     {
         
         if ( PQgetisnull( select_res.get(), i, column_drug_id ) || PQgetisnull( select_res.get(), i, column_drugstore_id ) || PQgetisnull( select_res.get(), i, column_price ) || PQgetisnull( select_res.get(), i, column_price ) ) //Checking for empty values, if exist at least
@@ -173,7 +173,7 @@ std::vector<distance> get_distances( std::shared_ptr<PGresult> select_res )
     int column_distance = PQfnumber( select_res.get(), "distance" );
     
     
-    for ( size_t i; i<n_rows; i++ )
+    for ( size_t i = 0; i<n_rows; i++ )
     {
         
         if ( PQgetisnull( select_res.get(), i, column_drugstore_a_id ) || PQgetisnull( select_res.get(), i, column_drugstore_b_id ) || PQgetisnull( select_res.get(), i, column_distance ) ) //Checking for empty values, if exist at least
