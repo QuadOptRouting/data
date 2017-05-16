@@ -23,7 +23,7 @@ struct Address {
 	long id;
 	std::string street;				//название улицы
 	std::string house;				//номер дома
-	std::string house_alter;		//альтернативный номер дома, если есть
+	std::string house_alter;		//альтернативный номер дома, если есть(пока тоже самое, что house)
 	int building;					//строение
 	int corp;						//корпус
 	double latitude;

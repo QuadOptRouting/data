@@ -1,6 +1,7 @@
-#include "geocoder.hpp"
-#include <regex>
+//Пример использования. Читаем геоданные из csv. Читаем адреса из csv. Пишем в стандартный вывод результат - адреса аптек и найденные координаты.
+
 #include <stdexcept>
+#include "geocoder.hpp"
 
 int main(int argc, char*argv[]){
 	try {
@@ -18,11 +19,11 @@ int main(int argc, char*argv[]){
 		std::vector<std::string> drugstore_address_str;
 		std::vector<Address> drugstore_address;
 		
-		for(int i = 0; i < data.size(); i++) {
+		for(unsigned int i = 0; i < data.size(); i++) {
 			drugstore_address_str.push_back(data[i][1]);
 			
 		}
-		for(int i = 0; i < drugstore_address_str.size(); ++i) {
+		for(unsigned int i = 0; i < drugstore_address_str.size(); ++i) {
 			drugstore_address.push_back(geocoder.getCoordinates(drugstore_address_str[i]));
 			std::cout << i << ") " << drugstore_address[i].street << ", " << drugstore_address[i].house << ", " << drugstore_address[i].longitude << ", " << drugstore_address[i].latitude << std::endl;
 		}

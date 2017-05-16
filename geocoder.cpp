@@ -2,29 +2,24 @@
 #include <fstream>
 #include <regex>
 #include <locale>
-#include <string>
-#include <sys/types.h>
-#include <iomanip>
-#include <boost/lexical_cast.hpp>
 #include <sstream>
-#include <string>
 
 #include "geocoder.hpp"
 
 template<typename T>
 T StringToNumber(const std::string& numberAsString) {
-	T valor;
+	T value;
 	std::stringstream stream(numberAsString);
-	stream >> valor;
+	stream >> value;
 	if (stream.fail()) {
 		std::runtime_error e(numberAsString);
 		throw e;
 	}
-	return valor;
+	return value;
 }
 
 void CSVparser::readCSV(const std::string& filepath, bool is_header, char delimiter, char escape, char quotes) {
-	std::ifstream in(filepath.c_str());
+	std::ifstream in(filepath);
     if(!in.is_open()) {
 		 throw("error: File was not open\n");
 	}
@@ -199,25 +194,20 @@ Address Geocoder::parseStringAddress(const std::string& address_str) const{
 	return address;
 }
 
-
-
-
 Address Geocoder::getCoordinates(const std::string& address) const {
 	bool isfound = false;
 	Address drugstore_address = parseStringAddress(address);
-	
-	for(int i = 0; i < geodata.size(); ++i) {
+	unsigned int i = 0;
+	while(i < geodata.size() && !isfound) {
 		if(geodata[i].street == drugstore_address.street && (geodata[i].house == drugstore_address.house || geodata[i].house_alter == drugstore_address.house_alter)
 		&& geodata[i].corp == drugstore_address.corp && geodata[i].building == drugstore_address.building) {
 			drugstore_address.latitude = geodata[i].latitude;
 			drugstore_address.longitude = geodata[i].longitude;
 			isfound = true;
-			break;
 		}
+		i++;
 	}
 	if(!isfound) {
-		//не все адреса удается найти, так что исключение, наверное, не надо кидать
-		//throw("error: Address not found\n");
 		std::cerr << "Warning: Address not found(" << drugstore_address.street << ", " << drugstore_address.house << ", к" << drugstore_address.corp << " ,с" << drugstore_address.building << ")\n";
 	}
 	return drugstore_address;
